@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 
 import com.kirch.poseidon.dummy.DummyContent;
+import com.parse.Parse;
 
 /**
  * A fragment representing a single Item detail screen.
@@ -45,6 +46,8 @@ public class ItemDetailFragment extends Fragment {
             // to load content from a content provider.
             mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
         }
+
+
     }
 
     @Override
@@ -81,6 +84,8 @@ public class ItemDetailFragment extends Fragment {
             default:
                 rootView = inflater.inflate(R.layout.point_of_sale, container, false);
         }
+
+
 
         return rootView;
     }
