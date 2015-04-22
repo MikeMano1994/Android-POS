@@ -10,6 +10,7 @@ import android.widget.EditText;
 
 import com.kirch.poseidon.dummy.DummyContent;
 import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
@@ -79,22 +80,12 @@ public class ItemDetailFragment extends Fragment {
 
                     @Override
                     public void onClick(View v) {
-                        ParseUser user = new ParseUser();
-                        user.setUsername(etName.getText().toString());
-                        user.setEmail(etEmail.getText().toString());
-                        user.setPassword("password");
-                        user.put("phone", etPhoneNumber.getText().toString());
-                        user.put("notes", etNotes.getText().toString());
-
-                        user.signUpInBackground(new SignUpCallback() {
-                            public void done(ParseException e) {
-                                if (e == null) {
-                                    System.out.println("Success");
-                                } else {
-                                    e.printStackTrace();
-                                }
-                            }
-                        });
+                        ParseObject customer = new ParseObject("Customer");
+                        customer.put("Name", etName.getText().toString());
+                        customer.put("Phone", Integer.parseInt( etPhoneNumber.getText().toString()));
+                        customer.put("email", etEmail.getText().toString());
+                        customer.put("notes", etNotes.getText().toString());
+                        customer.saveInBackground();
                     }
 
                 });
