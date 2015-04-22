@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.parse.Parse;
 import com.parse.ParseObject;
@@ -19,7 +21,9 @@ import com.parse.ParseObject;
  * This activity is mostly just a 'shell' activity containing nothing
  * more than a {@link ItemDetailFragment}.
  */
-public class ItemDetailActivity extends ActionBarActivity {
+public class ItemDetailActivity extends ActionBarActivity implements View.OnClickListener{
+
+    Button createAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,14 +33,6 @@ public class ItemDetailActivity extends ActionBarActivity {
         // Show the Up button in the action bar.
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        // Enable Local Datastore.
-        Parse.enableLocalDatastore(this);
-
-        Parse.initialize(this, "0QUFrHIvmjr2oJhdx6aa5GPBdaao7STTdigjHDEQ", "4q4ibWDI98Onb80IQPhwodsxkt3JcVQV5EBbm31j");
-
-        ParseObject testObject = new ParseObject("TestObject");
-        testObject.put("foo", "bar");
-        testObject.saveInBackground();
         // savedInstanceState is non-null when there is fragment state
         // saved from previous configurations of this activity
         // (e.g. when rotating the screen from portrait to landscape).
@@ -58,6 +54,9 @@ public class ItemDetailActivity extends ActionBarActivity {
                     .add(R.id.item_detail_container, fragment)
                     .commit();
         }
+
+        createAccount = (Button) findViewById(R.id.bCreateAccount);
+        createAccount.setOnClickListener(this);
     }
 
     @Override
@@ -75,5 +74,20 @@ public class ItemDetailActivity extends ActionBarActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()){
+
+            case R.id.bCreateAccount:
+
+                System.out.println("EPIC");
+
+                break;
+
+        }
+
     }
 }

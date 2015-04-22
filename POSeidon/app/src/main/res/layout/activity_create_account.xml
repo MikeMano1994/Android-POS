@@ -10,7 +10,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:textSize="36dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="20dp"
         android:id="@+id/textView" />
 
     <EditText
@@ -19,19 +19,18 @@
         android:inputType="textPersonName"
         android:text="Name"
         android:ems="10"
-        android:id="@+id/editText"
+        android:id="@+id/etName"
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="150dp" />
+        android:layout_marginTop="50dp" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="phone"
         android:ems="10"
-        android:id="@+id/editText2"
-        android:text="Phone Number"
-        android:layout_below="@+id/editText"
+        android:id="@+id/etPhone"
+        android:layout_below="@+id/etName"
         android:layout_centerHorizontal="true" />
 
     <EditText
@@ -39,9 +38,9 @@
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         android:ems="10"
-        android:id="@+id/editText3"
+        android:id="@+id/etEmail"
         android:text="E-Mail"
-        android:layout_below="@+id/editText2"
+        android:layout_below="@+id/etPhone"
         android:layout_centerHorizontal="true" />
 
     <EditText
@@ -49,9 +48,9 @@
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
         android:ems="10"
-        android:id="@+id/editText4"
+        android:id="@+id/etNotes"
         android:text="ExtraNotes"
-        android:layout_below="@+id/editText3"
+        android:layout_below="@+id/etEmail"
         android:layout_centerHorizontal="true" />
 
     <Button
@@ -59,7 +58,7 @@
         android:layout_height="wrap_content"
         android:text="Create Account"
         android:id="@+id/bCreateAccount"
-        android:layout_below="@+id/editText4"
+        android:layout_below="@+id/etNotes"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

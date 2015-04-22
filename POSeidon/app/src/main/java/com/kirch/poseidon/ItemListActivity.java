@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
+import com.parse.Parse;
+import com.parse.ParseObject;
+
 
 /**
  * An activity representing a list of Items. This activity
@@ -48,6 +51,13 @@ public class ItemListActivity extends FragmentActivity
                     .findFragmentById(R.id.item_list))
                     .setActivateOnItemClick(true);
         }
+
+
+
+        // Enable Local Datastore.
+        Parse.enableLocalDatastore(this);
+        Parse.initialize(this, "0QUFrHIvmjr2oJhdx6aa5GPBdaao7STTdigjHDEQ", "4q4ibWDI98Onb80IQPhwodsxkt3JcVQV5EBbm31j");
+
 
         // TODO: If exposing deep links into your app, handle intents here.
     }
