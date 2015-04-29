@@ -10,6 +10,69 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:textSize="36dp"
-        android:layout_marginTop="60dp" />
+        android:layout_marginTop="60dp"
+        android:id="@+id/textView2" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/etItemSerial"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="108dp"
+        android:hint="Serial" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:ems="10"
+        android:id="@+id/etItemName"
+        android:layout_below="@+id/etItemSerial"
+        android:layout_centerHorizontal="true"
+        android:hint="Name" />
+
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/etItemQuantity"
+        android:layout_below="@+id/etItemName"
+        android:layout_centerHorizontal="true"
+        android:hint="Quantity" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/etItemPrice"
+        android:layout_below="@+id/etItemQuantity"
+        android:layout_centerHorizontal="true"
+        android:hint="Price" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Scan"
+        android:id="@+id/bScanInventory"
+        android:layout_alignBottom="@+id/etItemSerial"
+        android:layout_toRightOf="@+id/etItemSerial"
+        android:layout_toEndOf="@+id/etItemSerial"
+        style="?android:attr/borderlessButtonStyle"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add To Inventory Database"
+        android:id="@+id/bAddInventory"
+        android:layout_below="@+id/etItemPrice"
+        android:layout_alignLeft="@+id/etItemPrice"
+        android:layout_alignStart="@+id/etItemPrice" />
+
 
 </RelativeLayout>

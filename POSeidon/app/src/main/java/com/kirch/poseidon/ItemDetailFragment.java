@@ -1,5 +1,6 @@
 package com.kirch.poseidon;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -14,6 +15,8 @@ import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
+import me.dm7.barcodescanner.zxing.ZXingScannerView;
+
 
 /**
  * A fragment representing a single Item detail screen.
@@ -26,6 +29,9 @@ public class ItemDetailFragment extends Fragment {
      * The fragment argument representing the item ID that this fragment
      * represents.
      */
+    public static View rootView;
+
+
     public static final String ARG_ITEM_ID = "item_id";
 
     /**
@@ -60,7 +66,7 @@ public class ItemDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View rootView;
+
 
         switch (mItem.id) {
             case "pos":
@@ -98,6 +104,35 @@ public class ItemDetailFragment extends Fragment {
                 break;
             case "addInventory":
                 rootView = inflater.inflate(R.layout.add_inventory, container, false);
+                Button scanInventoryItemButton = (Button) rootView.findViewById(R.id.bScanInventory);
+                Button addInventoryButton = (Button) rootView.findViewById(R.id.bAddInventory);
+                final EditText etSerialNumber = (EditText) rootView.findViewById(R.id.etItemSerial);
+                final EditText etProductName = (EditText) rootView.findViewById(R.id.etItemName);
+                final EditText etItemQuantity = (EditText) rootView.findViewById(R.id.etItemQuantity);
+                final EditText etItemPrice = (EditText) rootView.findViewById(R.id.etItemPrice);
+                scanInventoryItemButton.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+
+                        Intent intent = new Intent(getActivity(), ScannerActivity.class);
+                        startActivity(intent);
+                    }
+
+                });
+                addInventoryButton.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        ParseObject inventory = new ParseObject("Inventory");
+                        inventory.put("UPC", Integer.parseInt(etSerialNumber.getText().toString()));
+                        inventory.put("Product_Name", etProductName.getText().toString());
+                        inventory.put("Stock", Integer.parseInt( etItemQuantity.getText().toString()));
+                        inventory.put("Price", Double.parseDouble( etItemPrice.getText().toString()));
+                        inventory.saveInBackground();
+                    }
+
+                });
                 break;
             case "removeInvetory":
                 rootView = inflater.inflate(R.layout.remove_inventory, container, false);
@@ -111,5 +146,10 @@ public class ItemDetailFragment extends Fragment {
 
 
         return rootView;
+    }
+
+    public static void recievedScan(String serialNumber){
+        final EditText etSerialNumber = (EditText) rootView.findViewById(R.id.etItemSerial);
+        etSerialNumber.setText(serialNumber);
     }
 }

@@ -21,9 +21,8 @@ import com.parse.ParseObject;
  * This activity is mostly just a 'shell' activity containing nothing
  * more than a {@link ItemDetailFragment}.
  */
-public class ItemDetailActivity extends ActionBarActivity implements View.OnClickListener{
+public class ItemDetailActivity extends ActionBarActivity {
 
-    Button createAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,8 +54,7 @@ public class ItemDetailActivity extends ActionBarActivity implements View.OnClic
                     .commit();
         }
 
-        createAccount = (Button) findViewById(R.id.bCreateAccount);
-        createAccount.setOnClickListener(this);
+
     }
 
     @Override
@@ -76,18 +74,4 @@ public class ItemDetailActivity extends ActionBarActivity implements View.OnClic
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onClick(View v) {
-
-        switch (v.getId()){
-
-            case R.id.bCreateAccount:
-
-                System.out.println("EPIC");
-
-                break;
-
-        }
-
-    }
 }
