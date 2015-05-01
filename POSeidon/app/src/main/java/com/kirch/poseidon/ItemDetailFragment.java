@@ -3,6 +3,7 @@ package com.kirch.poseidon;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,10 +11,14 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.kirch.poseidon.dummy.DummyContent;
+import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
+
+import java.util.List;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
@@ -30,6 +35,7 @@ public class ItemDetailFragment extends Fragment {
      * represents.
      */
     public static View rootView;
+    public static int viewSwitch = 0;
 
 
     public static final String ARG_ITEM_ID = "item_id";
@@ -70,7 +76,21 @@ public class ItemDetailFragment extends Fragment {
 
         switch (mItem.id) {
             case "pos":
+                viewSwitch = 0;
                 rootView = inflater.inflate(R.layout.activity_pos, container, false);
+                Button itemScannedButton = (Button) rootView.findViewById(R.id.scanButton);
+                EditText etItemSerial = (EditText) rootView.findViewById(R.id.etSerialPOS);
+                itemScannedButton.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+
+                        Intent intent = new Intent(getActivity(), ScannerActivity.class);
+                        startActivity(intent);
+
+                    }
+
+                });
                 break;
             case "return":
                 rootView = inflater.inflate(R.layout.return_item, container, false);
@@ -103,6 +123,7 @@ public class ItemDetailFragment extends Fragment {
                 rootView = inflater.inflate(R.layout.order_inventory, container, false);
                 break;
             case "addInventory":
+                viewSwitch = 1;
                 rootView = inflater.inflate(R.layout.add_inventory, container, false);
                 Button scanInventoryItemButton = (Button) rootView.findViewById(R.id.bScanInventory);
                 Button addInventoryButton = (Button) rootView.findViewById(R.id.bAddInventory);
@@ -128,7 +149,7 @@ public class ItemDetailFragment extends Fragment {
                         inventory.put("UPC", Integer.parseInt(etSerialNumber.getText().toString()));
                         inventory.put("Product_Name", etProductName.getText().toString());
                         inventory.put("Stock", Integer.parseInt( etItemQuantity.getText().toString()));
-                        inventory.put("Price", Double.parseDouble( etItemPrice.getText().toString()));
+                        inventory.put("Price", Double.parseDouble(etItemPrice.getText().toString()));
                         inventory.saveInBackground();
                     }
 
@@ -149,7 +170,40 @@ public class ItemDetailFragment extends Fragment {
     }
 
     public static void recievedScan(String serialNumber){
-        final EditText etSerialNumber = (EditText) rootView.findViewById(R.id.etItemSerial);
-        etSerialNumber.setText(serialNumber);
+
+        switch (viewSwitch){
+            case 0:
+
+                EditText etItemSerial = (EditText) rootView.findViewById(R.id.etSerialPOS);
+                etItemSerial.setText(serialNumber);
+
+                int serial = Integer.parseInt(etItemSerial.getText().toString());
+
+                ParseQuery<ParseObject> query = ParseQuery.getQuery("Inventory");
+                query.whereEqualTo("UPC", serial);
+                query.findInBackground(new FindCallback<ParseObject>() {
+                    public void done(List<ParseObject> items, ParseException e) {
+                        if (e == null) {
+                            Log.d("score", "Retrieved " + items.size() + " item");
+                        } else {
+                            Log.d("score", "Error: " + e.getMessage());
+                        }
+                    }
+                });
+
+                break;
+
+            case 1:
+
+                final EditText etSerialNumber = (EditText) rootView.findViewById(R.id.etItemSerial);
+                etSerialNumber.setText(serialNumber);
+
+                break;
+
+            default:
+                break;
+        }
+
+
     }
 }
