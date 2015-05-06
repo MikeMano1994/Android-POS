@@ -17,7 +17,7 @@
         android:layout_marginBottom="10dp" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/bAccountLookup"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -26,6 +26,18 @@
         android:layout_marginRight="15dp"
         android:layout_marginTop="10dp"
         android:text="Account Lookup" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:visibility="gone"
+        android:id="@+id/etPhoneLookup"
+        android:layout_alignTop="@+id/bAccountLookup"
+        android:layout_toLeftOf="@+id/bAccountLookup"
+        android:layout_toStartOf="@+id/bAccountLookup"
+        android:hint="Enter Phone"/>
 
     <View
         android:id="@+id/textView3"
@@ -228,16 +240,7 @@
         android:layout_centerHorizontal="true"
         android:text="Proceed to Payment" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:id="@+id/editText"
-        android:layout_alignTop="@+id/button"
-        android:layout_toLeftOf="@+id/button"
-        android:layout_toStartOf="@+id/button"
-        android:hint="Enter Phone"/>
+
 
 
 </RelativeLayout>

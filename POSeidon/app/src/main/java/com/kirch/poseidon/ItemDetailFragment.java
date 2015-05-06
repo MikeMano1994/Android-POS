@@ -54,7 +54,7 @@ public class ItemDetailFragment extends Fragment {
     static ArrayList<String> strArr = new ArrayList<String>();
     static ArrayAdapter<String> adapter;
 
-
+    static boolean accountLookupBool = false;
 
 
     public static final String ARG_ITEM_ID = "item_id";
@@ -99,6 +99,50 @@ public class ItemDetailFragment extends Fragment {
                 rootView = inflater.inflate(R.layout.activity_pos, container, false);
                 Button itemScannedButton = (Button) rootView.findViewById(R.id.scanButton);
                 EditText etItemSerial = (EditText) rootView.findViewById(R.id.etSerialPOS);
+                final Button accountLookupButton = (Button) rootView.findViewById(R.id.bAccountLookup);
+                final EditText etAccountPhone = (EditText) rootView.findViewById(R.id.etPhoneLookup);
+                final TextView tvName = (TextView) rootView.findViewById(R.id.posName);
+                final TextView tvNumber = (TextView) rootView.findViewById(R.id.posNumber);
+                final TextView tvEmail = (TextView) rootView.findViewById(R.id.posEmail);
+
+                accountLookupButton.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+
+                        if(!accountLookupBool) {
+                            etAccountPhone.setVisibility(View.VISIBLE);
+                            accountLookupButton.setText("Search");
+                            accountLookupBool = true;
+                        }else{
+
+                            String phone = etAccountPhone.getText().toString();
+
+                            ParseQuery<ParseObject> query = ParseQuery.getQuery("Customer");
+                            query.whereEqualTo("Phone", phone);
+                            query.findInBackground(new FindCallback<ParseObject>() {
+                                public void done(List<ParseObject> userList, ParseException e) {
+                                    if (e == null) {
+                                        tvName.setText("Name: " + userList.get(0).getString("Name"));
+                                        tvNumber.setText("Number: " +userList.get(0).getString("Phone"));
+                                        tvEmail.setText("Email: " +userList.get(0).getString("email"));
+                                    } else {
+                                        Log.d("score", "Error: " + e.getMessage());
+                                    }
+                                }
+                            });
+
+
+                            etAccountPhone.setVisibility(View.GONE);
+                            accountLookupButton.setText("Account Lookup");
+                            accountLookupBool = false;
+                        }
+
+                    }
+
+
+                });
+
                 itemScannedButton.setOnClickListener(new View.OnClickListener() {
 
                     @Override
@@ -127,7 +171,7 @@ public class ItemDetailFragment extends Fragment {
                     public void onClick(View v) {
                         ParseObject customer = new ParseObject("Customer");
                         customer.put("Name", etName.getText().toString());
-                        customer.put("Phone", Integer.parseInt( etPhoneNumber.getText().toString()));
+                        customer.put("Phone", etPhoneNumber.getText().toString());
                         customer.put("email", etEmail.getText().toString());
                         customer.put("notes", etNotes.getText().toString());
                         customer.saveInBackground();
