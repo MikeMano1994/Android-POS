@@ -16,7 +16,7 @@
     <LinearLayout
         android:layout_width="250dp"
         android:layout_height="250dp"
-        android:id="@+id/linearLayout"
+        android:id="@+id/llAccountInfo"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:layout_margin="20dp"
@@ -72,7 +72,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:layout_below="@+id/linearLayout"
+        android:layout_below="@+id/llAccountInfo"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_vertical"
         android:gravity="right"

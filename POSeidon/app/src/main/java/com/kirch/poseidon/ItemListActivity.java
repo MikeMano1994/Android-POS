@@ -1,5 +1,6 @@
 package com.kirch.poseidon;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -32,6 +33,7 @@ public class ItemListActivity extends FragmentActivity
      * device.
      */
     private boolean mTwoPane;
+    public static Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +55,7 @@ public class ItemListActivity extends FragmentActivity
         }
 
 
-
+        mContext = this;
         // Enable Local Datastore.
         Parse.enableLocalDatastore(this);
         Parse.initialize(this, "0QUFrHIvmjr2oJhdx6aa5GPBdaao7STTdigjHDEQ", "4q4ibWDI98Onb80IQPhwodsxkt3JcVQV5EBbm31j");

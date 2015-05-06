@@ -42,7 +42,6 @@ public class ScannerActivity  extends Activity implements ZXingScannerView.Resul
     public void handleResult(Result rawResult) {
         // Do something with the result here
         scannedText = rawResult.getText();
-        System.out.println(scannedText);
         ItemDetailFragment.recievedScan(rawResult.getText());
         finish();
     }

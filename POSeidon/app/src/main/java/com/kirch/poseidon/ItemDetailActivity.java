@@ -1,5 +1,6 @@
 package com.kirch.poseidon;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -22,6 +23,7 @@ import com.parse.ParseObject;
  * more than a {@link ItemDetailFragment}.
  */
 public class ItemDetailActivity extends ActionBarActivity {
+
 
 
     @Override
@@ -53,6 +55,8 @@ public class ItemDetailActivity extends ActionBarActivity {
                     .add(R.id.item_detail_container, fragment)
                     .commit();
         }
+
+
 
 
     }

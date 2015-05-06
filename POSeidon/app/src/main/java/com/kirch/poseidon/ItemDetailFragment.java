@@ -7,17 +7,24 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.kirch.poseidon.dummy.DummyContent;
+import com.parse.CountCallback;
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
@@ -36,6 +43,18 @@ public class ItemDetailFragment extends Fragment {
      */
     public static View rootView;
     public static int viewSwitch = 0;
+    static ListView listView;
+
+    //double declarations
+    static double subtotal = 0;
+    static double taxRate = 0.0615;
+    static double taxAmount =0;
+    static double total = 0;
+
+    static ArrayList<String> strArr = new ArrayList<String>();
+    static ArrayAdapter<String> adapter;
+
+
 
 
     public static final String ARG_ITEM_ID = "item_id";
@@ -146,11 +165,13 @@ public class ItemDetailFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         ParseObject inventory = new ParseObject("Inventory");
-                        inventory.put("UPC", Integer.parseInt(etSerialNumber.getText().toString()));
+
+                        inventory.put("UPC", etSerialNumber.getText().toString());
                         inventory.put("Product_Name", etProductName.getText().toString());
                         inventory.put("Stock", Integer.parseInt( etItemQuantity.getText().toString()));
                         inventory.put("Price", Double.parseDouble(etItemPrice.getText().toString()));
                         inventory.saveInBackground();
+
                     }
 
                 });
@@ -177,14 +198,38 @@ public class ItemDetailFragment extends Fragment {
                 EditText etItemSerial = (EditText) rootView.findViewById(R.id.etSerialPOS);
                 etItemSerial.setText(serialNumber);
 
-                int serial = Integer.parseInt(etItemSerial.getText().toString());
+                final TextView tvSubtotal = (TextView) rootView.findViewById(R.id.posSubtotal);
+                final TextView tvTax = (TextView) rootView.findViewById(R.id.posTax);
+                final TextView tvTotal = (TextView) rootView.findViewById(R.id.posTotal);
+
+                adapter = new ArrayAdapter<String>( ItemListActivity.mContext.getApplicationContext(), R.layout.customlist,strArr);
+
+                if (strArr.isEmpty())
+                 listView = (ListView)rootView.findViewById(R.id.itemLog);
+
+                listView.setAdapter(adapter);
 
                 ParseQuery<ParseObject> query = ParseQuery.getQuery("Inventory");
-                query.whereEqualTo("UPC", serial);
+                query.whereEqualTo("UPC", serialNumber);
                 query.findInBackground(new FindCallback<ParseObject>() {
-                    public void done(List<ParseObject> items, ParseException e) {
+                    public void done(List<ParseObject> itemList, ParseException e) {
                         if (e == null) {
-                            Log.d("score", "Retrieved " + items.size() + " item");
+                            String itemName = itemList.get(0).getString("Product_Name");
+                            double price = itemList.get(0).getDouble("Price");
+                            price = new BigDecimal(price).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+                            //update global price variable and labels
+                            subtotal += price;
+                            taxAmount = subtotal * taxRate;
+                            taxAmount = new BigDecimal(taxAmount).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+                            total = subtotal + taxAmount;
+                            tvSubtotal.setText("Subtotal: $" + String.valueOf(subtotal));
+                            tvTax.setText("Tax(6.15%): $" + String.valueOf(taxAmount));
+                            tvTotal.setText("Total: $" + String.valueOf(total));
+                            //update ListView
+                            String priceString = String.valueOf(price);
+                            strArr.add("  " + itemName + "                                                                                           $" + priceString);
+                            adapter.notifyDataSetChanged();
+                            System.out.println(strArr.size());
                         } else {
                             Log.d("score", "Error: " + e.getMessage());
                         }

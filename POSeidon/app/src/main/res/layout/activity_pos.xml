@@ -1,154 +1,243 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/testID"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/testID">
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/tvPOSHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
         android:text="POINT OF SALE"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="36dp" />
+        android:textSize="36sp"
+        android:layout_marginBottom="10dp" />
 
+    <Button
+        android:id="@+id/button"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="right"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:text="Account Lookup" />
 
-    <LinearLayout
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:id="@+id/linearLayout"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:layout_margin="20dp"
+    <View
+        android:id="@+id/textView3"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
         android:layout_below="@+id/tvPOSHeader"
-        android:layout_centerHorizontal="true">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="10dp"
-            android:text="Account Info"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-
-        <TextView
-            android:id="@+id/posName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:text="Name: John Doe" />
-
-        <TextView
-            android:id="@+id/posNumber"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:text="Number: (620)555-1234" />
-
-        <TextView
-            android:id="@+id/posEmail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:text="Email: john_doe1234@gmail.com" />
-
-        <TextView
-            android:id="@+id/posNotes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:text="Notes: " />
-
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
-            android:text="Account Lookup" />
-
-    </LinearLayout>
+        android:background="@color/Black" />
 
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_below="@+id/linearLayout"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center_vertical"
-        android:gravity="right"
-        android:orientation="vertical"
-        android:layout_margin="10dp"
-        android:id="@+id/positemView">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="10dp"
-            android:text="Add Product"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/tvPOSHeader"
+        android:weightSum="100"
+        android:id="@+id/infoPanel">
 
         <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_gravity="center_horizontal"
-            android:weightSum="100"
-            >
+            android:id="@+id/llAccountInfo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="50"
 
+            android:orientation="vertical"
+            android:background="@drawable/redgradient">
 
-            <EditText
-                android:layout_width="0dp"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:ems="10"
-                android:id="@+id/etSerialPOS"
-                android:layout_weight="70"
-                android:text="Enter Item Number" />
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Account Info"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/White"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
 
-            <Button
-                android:layout_width="0dp"
-                style="?android:attr/borderlessButtonStyle"
+            <TextView
+                android:id="@+id/posName"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Scan Barcode"
-                android:id="@+id/scanButton"
-                android:layout_weight="15" />
-            <Button
-                android:layout_width="0dp"
-                style="?android:attr/borderlessButtonStyle"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/White"
+                android:text="Name: John Doe" />
+
+            <TextView
+                android:id="@+id/posNumber"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Enter"
-                android:id="@+id/posEnterButton"
-                android:layout_weight="15" />
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/White"
+                android:text="Number: (620)555-1234" />
 
-
+            <TextView
+                android:id="@+id/posEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/White"
+                android:text="Email: john_doe1234@gmail.com" />
 
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="50"
+            android:orientation="vertical"
+            android:background="@drawable/bluegradient">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Current Transaction"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/White"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <TextView
+                android:id="@+id/posSubtotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/White"
+                android:text="Subtotal: $0.00" />
+
+            <TextView
+                android:id="@+id/posTax"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/White"
+                android:text="Tax(6.15%): $0.00" />
+
+            <TextView
+                android:id="@+id/posTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/White"
+                android:text="Total: $0.00" />
+        </LinearLayout>
 
 
     </LinearLayout>
 
-    <ListView
-        android:layout_width="match_parent"
+    <View
+        android:id="@+id/blackLine"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/infoPanel"
+        android:background="@color/Black"
+        android:orientation="vertical" />
+
+    <LinearLayout
+        android:id="@+id/positemView"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/itemLog"
-        android:layout_below="@+id/positemView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_above="@+id/posProceedToPayment"/>
+        android:layout_below="@+id/blackLine"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_vertical"
+        android:gravity="right"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="100">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="20"
+                android:text="Add Product:"
+                android:layout_marginLeft="10dp"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+
+            <EditText
+                android:id="@+id/etSerialPOS"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="50"
+                android:ems="10"
+                android:hint="Enter Item Number"
+                android:inputType="number" />
+
+            <Button
+                android:id="@+id/scanButton"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="15"
+                android:text="Scan" />
+
+            <Button
+                android:id="@+id/posEnterButton"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="15"
+                android:text="Enter" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_above="@+id/positemView"
+            android:background="@color/Black"
+            android:orientation="vertical" />
+
+
+        <ListView
+            android:id="@+id/itemLog"
+            android:paddingTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
 
     <Button
+        android:id="@+id/posProceedToPayment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Proceed to Payment"
-        android:id="@+id/posProceedToPayment"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:text="Proceed to Payment" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/editText"
+        android:layout_alignTop="@+id/button"
+        android:layout_toLeftOf="@+id/button"
+        android:layout_toStartOf="@+id/button"
+        android:hint="Enter Phone"/>
 
 
 </RelativeLayout>
